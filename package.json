@@ -1,11 +1,38 @@
 {
   "name": "vite-plugin-react-ssr",
+  "version": "0.1.0",
   "type": "module",
-  "private": true,
+  "description": "Vite plugin for prerendering index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cprecioso/vite-plugin-react-ssr.git"
+  },
+  "homepage": "https://github.com/cprecioso/vite-plugin-react-ssr#readme",
+  "bugs": {
+    "url": "https://github.com/cprecioso/vite-plugin-react-ssr/issues"
+  },
+  "author": "Carlos Precioso",
+  "license": "ISC",
   "packageManager": "yarn@4.12.0",
   "exports": {
     "types": "./dist/index.d.mts",
     "default": "./dist/index.mjs"
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "keywords": [
+    "vite",
+    "plugin",
+    "react",
+    "ssr",
+    "index",
+    "ssg"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "prepack": "tsdown"
   },
   "peerDependencies": {
     "react": "^19",
