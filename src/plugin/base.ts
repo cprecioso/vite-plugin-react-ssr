@@ -2,7 +2,14 @@
 
 import type { Plugin } from "vite";
 import pkg from "../../package.json" with { type: "json" };
-import { clientEntryPath, indexHtmlId, ssrEntryPath } from "../common";
+import {
+  clientEntryId,
+  clientEntryPath,
+  indexHtmlId,
+  ssrEntryId,
+  ssrEntryPath,
+  userAppId,
+} from "../common";
 
 export const makePluginBase = (
   phase: Extract<Plugin["apply"], string>,
@@ -22,13 +29,13 @@ export const makePluginBase = (
             return indexHtmlId;
 
           // These are just aliases to our bundled entry points
-          case "/@vite-plugin-react-ssr/ssr":
+          case ssrEntryId:
             return ssrEntryPath;
-          case "/@vite-plugin-react-ssr/client":
+          case clientEntryId:
             return clientEntryPath;
 
           // This is an alias to the user's app module
-          case "/@vite-plugin-react-ssr/app":
+          case userAppId:
             return await this.resolve(appModule, undefined, { isEntry: true });
         }
       },
