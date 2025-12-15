@@ -36,7 +36,13 @@ export const makePluginBase = (
 
           // This is an alias to the user's app module
           case userAppId:
-            return await this.resolve(appModule, undefined, { isEntry: true });
+            return await this.resolve(
+              appModule,
+              // We pass `importer: undefined` to avoid Vite trying to resolve it from our
+              // plugin file, and instead have it resolved from the user's project root
+              undefined,
+              { isEntry: true },
+            );
         }
       },
     },
