@@ -32,7 +32,9 @@
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
-    "prepack": "tsdown"
+    "prepack": "yarn run build",
+    "test-build": "yarn run build && cd test && vite build && vite preview",
+    "test-dev": "yarn run build && cd test && vite dev"
   },
   "peerDependencies": {
     "react": "^19",
@@ -50,6 +52,7 @@
     "prettier-plugin-sh": "^0.18.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "serve": "^14.2.5",
     "tsdown": "^0.17.3",
     "typescript": "^5.9.3",
     "vite": "^7.2.7"
