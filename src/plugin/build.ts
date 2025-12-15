@@ -25,23 +25,31 @@ export const makeBuildPlugin = ({
 
     sharedDuringBuild: true,
 
-    config(config) {
-      (config.builder ??= {}).buildApp = async (builder) => {
-        const ssrOutput = await builder.build(builder.environments.ssr);
+    config() {
+      return {
+        environments: {
+          ssr: {},
+          client: {},
+        },
+        builder: {
+          async buildApp(builder) {
+            const ssrOutput = await builder.build(builder.environments.ssr);
 
-        // `ssrOutput` is `RollupOutput | RollupOutput[] | RollupWatcher`
-        // We know it's `RollupOutput` because we're building a single build,
-        // so we can assert that here.
-        assert("output" in ssrOutput, "Unexpected SSR build output");
+            // `ssrOutput` is `RollupOutput | RollupOutput[] | RollupWatcher`
+            // We know it's `RollupOutput` because we're building a single build,
+            // so we can assert that here.
+            assert("output" in ssrOutput, "Unexpected SSR build output");
 
-        const ssrEntry = ssrOutput.output[0]; // The first chunk is our ssr entry
-        outputSsrEntryPath = path.resolve(
-          process.cwd(),
-          builder.environments.ssr.config.build.outDir,
-          ssrEntry.fileName,
-        );
+            const ssrEntry = ssrOutput.output[0]; // The first chunk is our ssr entry
+            outputSsrEntryPath = path.resolve(
+              process.cwd(),
+              builder.environments.ssr.config.build.outDir,
+              ssrEntry.fileName,
+            );
 
-        await builder.build(builder.environments.client);
+            await builder.build(builder.environments.client);
+          },
+        },
       };
     },
 
