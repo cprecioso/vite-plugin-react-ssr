@@ -1,0 +1,5 @@
+{
+  "extends": "@cprecioso/tsconfig/bundler",
+  "include": ["./**/*"],
+  "compilerOptions": { "jsx": "react-jsx" }
+}
